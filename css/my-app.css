@@ -1,0 +1,40 @@
+.custom-file-input 
+        {
+            display: inline-block;
+            position: relative;
+            color: #FFFFFF;
+        }
+        .custom-file-input input 
+        {
+            visibility: hidden;                 
+        }
+        .custom-file-input:before 
+        {
+            content: '\f030  fileupload';
+            font-family: FontAwesome;
+            display: block;
+            background: -webkit-linear-gradient( -180deg, #007AFF, #007AFF);
+            background: -o-linear-gradient( -180deg, #007AFF, #007AFF);
+            background: -moz-linear-gradient( -180deg, #007AFF, #007AFF);
+            background: linear-gradient( -180deg, #007AFF, #007AFF);
+            border: 3px solid #007AFF;
+            border-radius: 10px;
+            padding: 5px 0px;
+            width: 40%;
+            outline: none;
+            white-space: nowrap;
+            cursor: pointer;
+            text-align: center;
+            font-size: 12pt;
+            position: absolute;
+            left: 0;
+            right: 0;
+        }
+        .custom-file-input:hover:before 
+        {
+            border-color: #007AFF;
+        }
+        .custom-file-input:active:before 
+        {
+            background: #007AFF;
+        }   
