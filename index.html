@@ -16,9 +16,9 @@
     <!-- Path to your app js-->
     <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/kitchen-sink.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="./js/angular.min.js"></script>
 	
   </head>
   <body ng-init="init()" ng-app="myApp" ng-controller="myControler" >
@@ -28,6 +28,10 @@
     <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
     <div class="panel panel-left panel-reveal" ng-controller="GetFilenames">
+     
+     
+     <!--
+     
       <div class="content-block">
         <div class="content-block-title">Uploaded songs</div>
     <div class="list-block">
@@ -39,25 +43,45 @@
         <div class="item-inner" >
 			
           <div  class="item-title">{{fileName}}</div>
-          <!--<div class="item-after">Label</div>-->
+         
         </div>
       </a>
     </li>
       </ul>
       </div>
-      </div>
-      <script>
-//var app = angular.module('myApp', []);
-
-
-</script>
-		  
-		  </script>
+		</div>
+             -->
+               
+               <div class="list-block">
+      <ul>
+        <li class="swipeout" filename='{{fileName}}' ng-repeat="fileName in file_names" ng-click="replay(fileName)">
+          <div class="item-content swipeout-content" style="">
+            <div class="item-media"><i class="icon icon-f7"></i></div>
+            <div class="item-inner"> 
+              <div class="item-title">{{fileName}}</div>
+            </div>
+          </div>
+          <div class="swipeout-actions-right"><a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete" style="left: 0px;">Delete</a></div>
+        </li>
+       
+      </ul>
     </div>
+               
+               
+               
+               
+     
+      	 
+    </div> <!-- left panel end -->
     <!-- Right panel with cover effect-->
     <div class="panel panel-right panel-cover">
-      <div class="content-block">
+      <div class="content-block" ng-include="'./help.html'">
         <p>Right panel content goes here</p>
+        
+        
+        
+        
+
       </div>
       
     </div>
@@ -102,6 +126,7 @@
 		<div class="content-block-inner color-orange bold"><h1>FREQUENCY</h1></div>
         <p class="content-block"style="font-size:5em;">{{frequency}}</p>
     </div>
+ 
  
    
 				  
@@ -158,10 +183,13 @@
 <script>
 	//setting up angular js
 	var app = angular.module('myApp', []);
-app.controller('myControler', function($scope) {
+app.controller('myControler', function($scope,$http) {
 
 	$scope.init = function () {
 		//inital function
+  	
+  	
+
   	
 }
     $scope.frequency = "95";
@@ -190,13 +218,7 @@ $.post('http://raspberrypi.local/~pi/dev_piFM_project/phpFMplayer.php',{'play':'
 }
 	$scope.stopFm=function(e){
 		
-		//allpossible ips for raspberry pi
-//	$.post('http://192.168.1.10/~pi/index.php',{'stop':'play'});
-	
-	/*$.post('http://192.168.1.10/~pi/phpFMplayer.php',{'stop':'play'});
-	$.post('http://192.168.43.10/~pi/phpFMplayer.php',{'stop':'play'});//if wifi in meizu m2 note
-	$.post('http://raspberrypi.local/~pi/phpFMplayer.php',{'stop':'play'});//if from pc
-*/
+		
 	$.post('http://192.168.1.10/~pi/dev_piFM_project/phpFMplayer.php',{'stop':'play'});
 	$.post('http://192.168.43.10/~pi/dev_piFM_project/phpFMplayer.php',{'stop':'play'});//if wifi in meizu m2 note
 	$.post('http://raspberrypi.local/dev_piFM_project/~pi/phpFMplayer.php',{'stop':'play'});//if from pc
@@ -220,9 +242,10 @@ $.post('http://raspberrypi.local/~pi/dev_piFM_project/phpFMplayer.php',{'play':'
 				 console.log('close notification');
 			myApp7.closeNotification('.notification-item') 
 
-				 },3000);
+				 },5000);
 			});	
 		}
+
 
 });
 app.controller('GetFilenames', function($scope, $http) {
@@ -230,10 +253,23 @@ app.controller('GetFilenames', function($scope, $http) {
     .then(function(response) {
         $scope.file_names = response.data;
         
+      
+      
+			    $$('.swipeout').on('deleted', function () {
+           myApp7.alert('Item removed');
+         });
+			 
+           
+        
        console.log("getuploadedsongs called");
+       
+       
     });
+    
   
-});
+            });
+  
+			
 
 
 
@@ -250,7 +286,7 @@ $.post('http://192.168.1.10/~pi/index.php',{'play':'play','frequency':'95.0'});
 		
 			
 	f.value=parseFloat(parseFloat(slider1.value)+parseFloat(slider2.value))
-}
+	}
 </script>
 <script>
 	//framework 7 notification
@@ -263,11 +299,26 @@ $.post('http://192.168.1.10/~pi/index.php',{'play':'play','frequency':'95.0'});
          var $$ = Dom7;
 
         
-             myApp7.addNotification({
+       /*     
+       uncomment to show welcome message
+        myApp7.addNotification({
                  message: 'Welcome to pi radio'
              });
-      
-	
-	
+            */
+        /*     $$('.swipeout').on('deleted', function () {
+           myApp7.alert('Item removed');
+         });
+         */
+         
+        
+	$$('.open-panel').click(function(){
+		//myApp7.alert('openpanel');
+		
+		 $$('.swipeout').on('deleted', function () {
+           myApp7.alert('Item removed');
+           x=this;
+         });
+		});
+	x=null;
 	</script>
 </html>
