@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="with-statusbar-overlay">
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <title>Notifications</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.2/css/framework7.material.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.2/css/framework7.material.colors.min.css">
+   </head>
+   <body>
+      <div class="views">
+         <div class="view view-main">
+            <div class="pages navbar-fixed">
+               <div data-page="home" class="page">
+                  <div class="navbar">
+                     <div class="navbar-inner">
+                        <div class="center">Notifications</div>
+                     </div>
+                  </div>
+                  <div class="page-content">
+                     <div class="content-block">
+                        <p><a href="#" class="button button-raised notification-single">Single-line notification</a></p>
+                        <p><a href="#" class="button button-raised notification-multi">Multi-line notification</a></p>
+                        <p><a href="#" class="button button-raised notification-custom">With custom button</a></p>
+                        <p><a href="#" class="button button-raised notification-callback">With callback on close</a></p>
+                    
+                    
+                    <div class="list-block">
+  <ul>
+    <li class="swipeout">
+      <div class="swipeout-content item-content">
+        <div class="item-media">...</div>
+        <div class="item-inner">...</div>
+      </div>
+      <div class="swipeout-actions-left">
+        <a href="#" class="action1">Action L1</a>
+      </div>
+      <div class="swipeout-actions-right">
+        <a href="#" class="action1">Action R1</a>
+      </div>
+    </li>
+    
+    <li class="swipeout">
+  <div class="swipeout-content item-content">
+    <div class="item-media">...</div>
+    <div class="item-inner">...</div>
+  </div>
+  <div class="swipeout-actions-right">
+    <!-- Add this button and item will be deleted automatically -->
+    <a href="#" class="swipeout-delete">Delete</a>
+  </div>
+</li>
+    
+    
+    <li class="swipeout">
+  <div class="swipeout-content item-content">
+    <div class="item-media">...</div>
+    <div class="item-inner">...</div>
+  </div>
+  <div class="swipeout-actions-right">
+    <!-- We add data-confirm and data-confirm-title attributes -->
+    <a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?">Delete</a>
+    </div>
+  </div>
+</li>
+
+    </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.2/js/framework7.min.js"></script>
+      <script>
+         var myApp = new Framework7({
+           material: true
+         });
+         var mainView = myApp.addView('.view-main');
+
+         var $$ = Dom7;
+
+         $$('.notification-single').on('click', function () {
+             myApp.addNotification({
+                 message: 'Battery remaining only 20%'
+             });
+         });
+         $$('.notification-multi').on('click', function () {
+             myApp.addNotification({
+                 message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+             });
+         });
+         $$('.notification-custom').on('click', function () {
+             myApp.addNotification({
+                 message: 'Nice teal color button',
+                 button: {
+                     text: 'Click me',
+                     color: 'teal'
+                 }
+             });
+         });
+         $$('.notification-callback').on('click', function () {
+             myApp.addNotification({
+                 message: 'Close this notification to see an alert',
+                 button: {
+                     text: 'Close Me',
+                     color: 'red'
+                 },
+                 onClose: function () {
+                     myApp.alert('Callback made.. Notification closed');
+                 }
+             });
+         });
+      </script>
+   </body>
+</html>
