@@ -1,0 +1,26 @@
+<html>
+	<head>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	
+	</head>
+     <body ng-app="myApp" ng-controller="GetFilenames">
+      
+        <h1  ng-repeat="x in file_names">{{x}}</h1>
+      
+     
+     </body>
+      <script>
+var app = angular.module('myApp', []);
+app.controller('GetFilenames', function($scope, $http) {
+    $http.get("../getuploadedsongs.php")
+    .then(function(response) {
+        $scope.file_names = response.data;
+        
+       console.log("getfunction");
+    });
+});
+
+</script>
+	</html>	  
