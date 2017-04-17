@@ -1,12 +1,15 @@
- files;
+var files=null;
 
 // Add events
 $('input[type=file]').on('change', prepareUpload);
 
+
 // Grab the files and set them to our variable
 function prepareUpload(event)
 {
+	//console.log('selected file changed');
   files = event.target.files;
+  form1.submit();
 }
 
 
@@ -22,17 +25,21 @@ function prepareUpload(event)
 			event.stopPropagation(); // Stop stuff happening
 				event.preventDefault(); // Totally stop stuff happening
 			
+			console.log('stopPropagation');
 				// START A LOADING SPINNER HERE
 			
 				// Create a formdata object and add the files
 				var data = new FormData();
+				
+				data.append('play','play');
+				
 				$.each(files, function(key, value)
 				{
 					data.append(key, value);
 				});
 			
 				$.ajax({
-					url: 'submit.php?files',
+					url: 'phpFMplayer.php?music',
 					type: 'POST',
 					data: data,
 					cache: false,
@@ -74,9 +81,9 @@ function prepareUpload(event)
     {
         formData = formData + '&filenames[]=' + value;
     });
-
+gobalformData=formData;
     $.ajax({
-        url: 'submit.php',
+        url: 'phpFMplayer.php?music',
         type: 'POST',
         data: formData,
         cache: false,

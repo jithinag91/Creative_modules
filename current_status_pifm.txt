@@ -1,3 +1,12 @@
+17-4-2017
+all files added to index.php to avoid upload problem
+
+after file uploaded file name is send back using head(location:./index.php?filename=$filename )
+
+next step add admin password
+
+
+
 23-3-2017
 
 added notification on replay using framwork 7 javascript
