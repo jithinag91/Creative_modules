@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <title>Start App With Login Screen</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.2/css/framework7.ios.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.2/css/framework7.ios.colors.min.css">
+   </head>
+   <body>
+      <div class="views">
+         <div class="view view-main">
+            <div class="navbar">
+               <div class="navbar-inner">
+                  <div class="center sliding">Start App With Login Screen</div>
+               </div>
+            </div>
+            <div class="pages">
+               <div data-page="index" class="page navbar-fixed">
+                  <div class="page-content">
+                     <div class="content-block">
+                        <p><a href="#" class="open-login-screen">Click here to open Login Screen</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="login-screen modal-in">
+         <div class="view">
+            <div class="page">
+               <div class="page-content login-screen-content">
+                  <div class="login-screen-title">Login Here</div>
+                  <form>
+                     <div class="list-block">
+                        <ul>
+                           <li class="item-content">
+                              <div class="item-inner">
+                                 <div class="item-title label">Username</div>
+                                 <div class="item-input">
+                                    <input type="text" name="username" placeholder="Enter the username">
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="item-content">
+                              <div class="item-inner">
+                                 <div class="item-title label">Password</div>
+                                 <div class="item-input">
+                                    <input type="password" name="password" placeholder="Enter the password">
+                                 </div>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="list-block">
+                        <ul>
+                           <li><a href="#" class="item-link list-button">Log In</a></li>
+                        </ul>
+                        <div class="list-block-label">
+                           <p><a href="#" class="close-login-screen">Click here to close Login Screen</a></p>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.2/js/framework7.min.js"></script>
+      <script>
+         // Here you can initialize the app
+         var myApp = new Framework7();
+
+         // If your using custom DOM library, then save it to $$ variable
+         var $$ = Dom7;
+
+         // Add the view
+         var mainView = myApp.addView('.view-main', {
+         // enable the dynamic navbar for this view:
+            dynamicNavbar: true
+         });
+         $$('.login-screen .list-button').on('click', function () {
+            var uname = $$('.login-screen input[name="username"]').val();
+            var pwd = $$('.login-screen input[name="password"]').val();
+            myApp.alert('Username: ' + uname + ', Password: ' + pwd, function () {
+            myApp.closeModal('.login-screen');
+         });
+      });
+      </script>
+   </body>
+</html>

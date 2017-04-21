@@ -29,9 +29,62 @@ include('phpFMplayer.php');
   </head>
   
   <?php
-  if(false)
+  if(false)//make this false to goto to app direct
   {
+	  //LOGIN
+	  ?>
+	  <script>
+		  
+		  </script>
 	  
+	<div class="content-block-title "><h3>PI FM radio LOGIN</h3></div>
+	<form name='f' method='post' action='index.php'>
+<div class="list-block" >
+  <ul>
+    <!-- Text inputs -->
+    <li>
+      <div class="item-content">
+        <div class="item-media"><i class="icon f7-icons">USERNAME</i></div>
+        <div class="item-inner">
+          <div class="item-input">
+            <input type="text" placeholder="Your name">
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="item-content">
+        <div class="item-media"><i class="icon f7-icons">PASSWORD</i></div>
+        <div class="item-inner">
+          <div class="item-input">
+            <input type="password" placeholder="password">
+          </div>
+        </div>
+      </div>
+    </li>
+ 
+    <!-- Select -->
+    <li>
+      <div class="item-content">
+        <div class="item-media"></div>
+        <div class="item-inner">
+          <div class="item-input">
+           
+            <a href="#" class="button button-fill color-blue" onclick='f.submit()'>login</a>
+           <!--  <input class="button button-fill color-blue" name='login' type='submit' value='login'>
+          -->
+          </div>
+        </div>
+      </div>
+    </li>
+ 
+   
+  </ul>
+</div> 
+    <!-- list block -->
+
+</form>
+	  <?php
 	  
 	  }else{
   ?>
@@ -130,6 +183,10 @@ include('phpFMplayer.php');
              <!--  <div class="row">
         <div class="col-60"> 
 			-->
+			
+			<marquee><?php if(isset($_GET['filename'])){echo 'Last uploaded file: '.$_GET['filename'];}?></marquee>
+			
+			
 				<div class="content-block" >
 					<div class="content-block-inner" >
 						<p>RASPBERY PI radio</p>
@@ -272,15 +329,15 @@ $.post('http://raspberrypi.local/~pi/dev_piFM_project/phpFMplayer.php',{'play':'
 	$scope.replay=function(filename){
 		
 			console.log(filename);
-	
+	 myApp7.addNotification({
+                 message: 'Now Playing:'+filename
+             });
 			fq=$scope.frequency;
 		$.post('./phpFMplayer.php',{'replay':filename,'frequency':fq},function(data){
 			//alert(data);
 			console.log('replay responce');
 			
-			 myApp7.addNotification({
-                 message: 'Now Playing:'+filename
-             });
+			
              setTimeout(function(){
 				 
 				 console.log('close notification');
